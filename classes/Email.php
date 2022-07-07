@@ -4,6 +4,11 @@ namespace Classes;
 
 use PHPMailer\PHPMailer\PHPMailer;
 
+use Dotenv\Dotenv as Dotenv;
+$dotenv = Dotenv::createImmutable('../includes/.env');
+$dotenv->safeLoad();
+
+
 class Email {
 
     public $nombre;
@@ -18,14 +23,24 @@ class Email {
 
     public function enviarConfirmacion() {
 
-        // Crear el objeto de Email        
+        // Crear el objeto de Email                
         $mail = new PHPMailer();
+        /*
         $mail->isSMTP();
         $mail->Host = 'smtp.mailtrap.io';
         $mail->SMTPAuth = true;
         $mail->Port = 2525;
-        $mail->Username = '0acaf3d38550b4';
-        $mail->Password = '0b59277437f7b4';
+        $mail->Username = '25cafcb6481ae0';
+        $mail->Password = '6d471064c22bf8';
+        */
+        // Configurar SMTP
+        $mail->isSMTP();
+        $mail->Host = $_ENV['MAIL_HOST'];
+        $mail->SMTPAuth = true;
+        $mail->Username = $_ENV['MAIL_USER'];
+        $mail->Password = $_ENV['MAIL_PASSWORD'];
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = $_ENV['MAIL_PORT'];
 
         $mail->setFrom('cuentas@appsalon.com');
         $mail->addAddress('cuentas@appsalon.com' , 'AppSalon.com');
@@ -38,7 +53,7 @@ class Email {
         $contenido = '<html>';
         $contenido .= "<p><strong>Hola " . $this->email . "</strong> Has creado tu cuenta con AppSalon,
         solo debes confirmarla presionando el siguiente enlace</p>";
-        $contenido .=  "<p>Presiona aquí: <a href='http://localhost:3000/confirmar-cuenta?token="
+        $contenido .=  "<p>Presiona aquí: <a href='" . $_ENV['SERVER_HOST'] . "confirmar-cuenta?token="
         . $this->token . "'>Confirmar Cuenta</a> </p>";
         $contenido .=  "<p>Si tu no solicitaste esta cuenta, puedes ignorar el mensaje</p>"; 
         $contenido .= '</html>';
@@ -52,12 +67,22 @@ class Email {
 
         // Crear el objeto de Email        
         $mail = new PHPMailer();
+        /*
         $mail->isSMTP();
         $mail->Host = 'smtp.mailtrap.io';
         $mail->SMTPAuth = true;
         $mail->Port = 2525;
-        $mail->Username = '0acaf3d38550b4';
-        $mail->Password = '0b59277437f7b4';
+        $mail->Username = '25cafcb6481ae0';
+        $mail->Password = '6d471064c22bf8';
+        */
+        // Configurar SMTP
+        $mail->isSMTP();
+        $mail->Host = $_ENV['MAIL_HOST'];
+        $mail->SMTPAuth = true;
+        $mail->Username = $_ENV['MAIL_USER'];
+        $mail->Password = $_ENV['MAIL_PASSWORD'];
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = $_ENV['MAIL_PORT'];
 
         $mail->setFrom('cuentas@appsalon.com');
         $mail->addAddress('cuentas@appsalon.com' , 'AppSalon.com');
@@ -70,7 +95,7 @@ class Email {
         $contenido = '<html>';
         $contenido .= "<p><strong>Hola " . $this->nombre . "</strong> Has solicitado 
         reestablecer tu password, sigue el siguiente enlace para hacerlo</p>";
-        $contenido .=  "<p>Presiona aquí: <a href='http://localhost:3000/recuperar?token="
+        $contenido .=  "<p>Presiona aquí: <a href='" . $_ENV['SERVER_HOST'] . "recuperar?token="
         . $this->token . "'>Reestablecer Password</a> </p>";
         $contenido .=  "<p>Si tu no solicitaste esta cuenta, puedes ignorar el mensaje</p>"; 
         $contenido .= '</html>';
