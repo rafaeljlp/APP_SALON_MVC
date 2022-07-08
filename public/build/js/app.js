@@ -2,6 +2,8 @@ let paso = 1;
 const pasoInicial = 1,
   pasoFinal = 3,
   cita = { id: "", nombre: "", fecha: "", hora: "", servicios: [] };
+const server = window.location.origin;
+
 function iniciarApp() {
   mostrarSeccion(),
     tabs(),
@@ -57,7 +59,7 @@ function paginaSiguiente() {
 }
 async function consultarAPI() {
   try {
-    const e = "http://localhost:3000/api/servicios",
+    const e = "${server}/api/servicios",
       t = await fetch(e);
     mostrarServicios(await t.json());
   } catch (e) {
@@ -188,7 +190,7 @@ async function reservarCita() {
     r.append("usuarioId", n),
     r.append("servicios", c);
   try {
-    const e = "http://localhost:3000/api/citas",
+    const e = "${server}/api/citas",
       t = await fetch(e, { method: "POST", body: r }),
       o = await t.json();
     console.log(o.resultado),
