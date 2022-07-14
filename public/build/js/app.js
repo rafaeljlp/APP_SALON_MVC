@@ -2,8 +2,6 @@ let paso = 1;
 const pasoInicial = 1,
   pasoFinal = 3,
   cita = { id: "", nombre: "", fecha: "", hora: "", servicios: [] };
-const server = window.location.origin;
-
 function iniciarApp() {
   mostrarSeccion(),
     tabs(),
@@ -59,7 +57,7 @@ function paginaSiguiente() {
 }
 async function consultarAPI() {
   try {
-    const e = "${server}/api/servicios",
+    const e = "https://thawing-ravine-18904.herokuapp.com/servicios",
       t = await fetch(e);
     mostrarServicios(await t.json());
   } catch (e) {
@@ -190,7 +188,7 @@ async function reservarCita() {
     r.append("usuarioId", n),
     r.append("servicios", c);
   try {
-    const e = "${server}/api/citas",
+    const e = "https://thawing-ravine-18904.herokuapp.com/api/citas",
       t = await fetch(e, { method: "POST", body: r }),
       o = await t.json();
     console.log(o.resultado),
