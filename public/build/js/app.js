@@ -57,7 +57,7 @@ function paginaSiguiente() {
 }
 async function consultarAPI() {
   try {
-    const e = "https://thawing-ravine-18904.herokuapp.com/servicios",
+    const e = "https://thawing-ravine-18904.herokuapp.com/api/servicios",
       t = await fetch(e);
     mostrarServicios(await t.json());
   } catch (e) {
