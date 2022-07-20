@@ -132,7 +132,7 @@ class LoginController {
                 // se toma de la instancia de password el password y se le asigna al usuario
                 $usuario->password = $password->password;
                 $usuario->hashPassword();
-                $usuario->token = null;
+                $usuario->token = '';
 
                 $resultado = $usuario->guardar();
                 if($resultado) {
@@ -216,7 +216,7 @@ class LoginController {
         } else {
             // Modificar a usuario confirmado            
             $usuario->confirmado = '1';
-            $usuario->token=null;
+            $usuario->token='';
             $usuario->guardar();
             Usuario::setAlerta('exito', 'Cuenta Comprobada Correctamente');
         }
