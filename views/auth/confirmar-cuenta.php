@@ -4,5 +4,5 @@
 
 
 <div class="acciones">
-    <a href="/crear-cuenta">Iniciar Sesión</a>   
+    <a href="/">Iniciar Sesión</a>   
 </div>
